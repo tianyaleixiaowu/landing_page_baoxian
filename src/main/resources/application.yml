@@ -1,0 +1,20 @@
+spring:
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect  #不加这句则默认为myisam引擎
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_URL:localhost:3306}/anbang?autoReconnect=true&useUnicode=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASS:root}
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500,expireAfterAccess=3600s   #最后一次写入或访问后经过固定时间过期
+logging:
+  file: ./logback.log
